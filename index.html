@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Koalas in Australia | Habitat, Risk & Conservation</title>
+  <meta name="description" content="A data visualisation story about koala habitat, monitoring and conservation in Australia.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow">AUSTRALIA · WILDLIFE · CONSERVATION</p>
+      <h1>Beyond the Eucalyptus: The Fight for Australia's Koalas</h1>
+      <p class="dek">A visual story about where koalas live, what puts them at risk, and why reliable monitoring matters.</p>
+      <p class="hero-note">FIT3179 · DV2 · <span id="updated-date">October 2026</span></p>
+    </div>
+  </header>
+
+  <main>
+    <section class="intro">
+      <div>
+        <p class="section-kicker">THE BIG PICTURE</p>
+        <h2>Finding koalas is difficult. Protecting their habitat is essential.</h2>
+      </div>
+      <p>Koala numbers are estimated using different survey methods, while habitat maps and rescue records answer different questions. These thirteen visualisations (including an Australia locator) use the Queensland koala hospital records included with this project. Counts reflect reported cases, not all koalas in the wild.</p>
+    </section>
+
+    <section class="callout" aria-label="Population estimate caveat">
+      <strong>Important context</strong>
+      <p>The Australian Government's 2025 estimate for listed koala populations in Queensland, New South Wales and the ACT was 398,000–569,000. The government warns that this is not directly comparable with the 2024 estimate because survey coverage and methods changed. A larger estimate does not by itself prove population growth.</p>
+      <a href="https://www.dcceew.gov.au/environment/biodiversity/threatened/species/koalas/national-koala-monitoring-program" target="_blank" rel="noopener">Read the National Koala Monitoring Program source ↗</a>
+    </section>
+
+    <section class="story-section">
+      <p class="section-kicker">01 / WHERE THEY CAN LIVE</p>
+      <h2>Reported koala encounters cluster near urban areas</h2>
+      <p class="section-intro">Begin with an Australia overview to locate the study area. The three detailed maps then zoom into southeast Queensland, where most records in this dataset are concentrated. These are hospital records, not koala population estimates.</p>
+      <div class="chart-grid">
+        <article class="chart-card wide"><h3>Australia overview · Where is the study area?</h3><p class="chart-caption">For readers unfamiliar with Australian geography: the highlighted area is southeast Queensland on Australia’s east coast. Maps 1–3 zoom into this region.</p><div id="chart-map-overview" class="chart"></div></article>
+        <article class="chart-card wide"><h3>Map 1 · Proportional symbol map of hospital records</h3><p class="chart-caption">Circles represent local government areas, placed at their median recorded location; circle size represents hospital record counts, not wild koala populations. The detailed map zooms into southeast Queensland; use the Australia overview above for geographic context.</p><div id="chart-map-habitat" class="chart"></div></article>
+        <article class="chart-card"><h3>Map 2 · Bin map of recorded incidents</h3><p class="chart-caption">Equal-sized 0.22° grid cells show reported incidents. Orange marks fewer cases; darker blue marks more. A logarithmic scale makes smaller clusters easier to distinguish.</p><div id="chart-map-records" class="chart"></div></article>
+        <article class="chart-card"><h3>Map 3 · Flow map of rescues and recorded releases</h3><p class="chart-caption">A sample of records with an original and release coordinate 5–85 km apart. Teal circles show the original location and orange triangle arrowheads show the release end and movement direction. Lines show straight-line movement, not actual travel routes. Many shorter moves are omitted for legibility.</p><div id="chart-map-flow" class="chart"></div></article>
+      </div>
+    </section>
+
+    <section class="story-section">
+      <p class="section-kicker">02 / WHAT RESCUE RECORDS REVEAL</p>
+      <h2>Recorded rescues can reveal patterns of risk</h2>
+      <p class="section-intro">Hospital records are valuable for understanding reported incidents and outcomes. They are not a population census, and changes may reflect reporting, access or rescue practices.</p>
+      <div class="chart-grid">
+        <article class="chart-card"><h3>Chart 4 · Seasonal pattern of hospital records</h3><p class="chart-caption">A line chart compares hospital record totals across the twelve calendar months, combined over all years.</p><div id="chart-calendar" class="chart"></div></article>
+        <article class="chart-card"><h3>Chart 5 · Incident flags over time</h3><p class="chart-caption">A stacked area chart shows how different incident flags contribute to annual reports. Flags may overlap, so the stack is not a count of unique koalas.</p><div id="chart-threat-heatmap" class="chart"></div></article>
+        <article class="chart-card"><h3>Chart 6 · Recorded outcomes by situation</h3><p class="chart-caption">Stacked horizontal bars compare the mix of recorded outcomes for each encounter situation.</p><div id="chart-flow" class="chart"></div></article>
+        <article class="chart-card"><h3>Chart 7 · Changing threat ranks</h3><p class="chart-caption">Incident-flag categories ranked each year by recorded count (overlapping categories).</p><div id="chart-bump" class="chart"></div></article>
+        <article class="chart-card"><h3>Chart 8 · Comparing recorded outcomes</h3><p class="chart-caption">A lollipop chart compares how frequently each outcome was recorded.</p><div id="chart-treemap" class="chart"></div></article>
+        <article class="chart-card"><h3>Chart 9 · Highest-recording local government areas</h3><p class="chart-caption">Ranked vertical columns compare the twelve local government areas with the most hospital records.</p><div id="chart-beeswarm" class="chart"></div></article>
+      </div>
+    </section>
+
+    <section class="story-section">
+      <p class="section-kicker">03 / CONSERVATION RESPONSE</p>
+      <h2>The evidence changes with time and location</h2>
+      <p class="section-intro">The hospital dataset reveals reporting patterns, changes in record counts and differences between incident categories. It does not measure total population or habitat loss.</p>
+      <div class="chart-grid">
+        <article class="chart-card"><h3>Chart 10 · Annual hospital records</h3><p class="chart-caption">Annual counts from the hospital dataset. These are not estimates of habitat change.</p><div id="chart-slope" class="chart"></div></article>
+        <article class="chart-card"><h3>Chart 11 · Situations recorded</h3><p class="chart-caption">A donut chart compares common recorded situations.</p><div id="chart-packed" class="chart"></div></article>
+        <article class="chart-card wide"><h3>Chart 12 · Incident types across two periods</h3><p class="chart-caption">The proportion of records flagged for each incident type across two periods. Flags can overlap.</p><div id="chart-connected-dot" class="chart"></div></article>
+      </div>
+    </section>
+
+    <section class="method">
+      <p class="section-kicker">READ THE EVIDENCE</p>
+      <h2>What these data can—and cannot—tell us</h2>
+      <div class="method-grid">
+        <div><h3>Population estimates</h3><p>Modelled estimates depend on survey coverage and method. Compare across years only when the source confirms comparability.</p></div>
+        <div><h3>Habitat maps</h3><p>Suitability models identify likely habitat and priority areas; they do not confirm that koalas are present at every mapped location.</p></div>
+        <div><h3>Rescue records</h3><p>Hospital and rescue records describe reported animals and incidents. They are influenced by human access, reporting and rescue capacity.</p></div>
+      </div>
+    </section>
+
+    <section class="sources">
+      <p class="section-kicker">SOURCES & ACKNOWLEDGEMENTS</p>
+      <h2>Data sources</h2>
+      <ul>
+        <li><a href="https://www.dcceew.gov.au/environment/biodiversity/threatened/species/koalas/national-koala-monitoring-program" target="_blank" rel="noopener">Australian Government — National Koala Monitoring Program</a></li>
+        <li><a href="https://www.data.qld.gov.au/dataset/koala-hospital-data" target="_blank" rel="noopener">Queensland Government — Koala Hospital Data</a></li>
+        <li><a href="https://www.planningportal.nsw.gov.au/opendata/dataset/koala-habitat-information-base" target="_blank" rel="noopener">NSW Government — Koala Habitat Information Base</a></li>
+        <li><a href="https://www.data.qld.gov.au/dataset/south-east-queensland-koala-conservation-strategy-2020-2025" target="_blank" rel="noopener">Queensland Government — South East Queensland Koala Conservation Strategy spatial data</a></li>
+        <li><a href="https://www.ala.org.au/" target="_blank" rel="noopener">Atlas of Living Australia — occurrence records</a></li>
+      </ul>
+      <p class="smallprint">Authored by Elsa Chua Yi Reen · Monash University Malaysia · FIT3179 · 2026. </p>
+    </section>
+  </main>
+  <footer><span>KOALA CONSERVATION · DATA VISUALISATION</span><span>FIT3179 · 2026</span></footer>
+  <script src="js/main.js"></script>
+</body>
+</html>
