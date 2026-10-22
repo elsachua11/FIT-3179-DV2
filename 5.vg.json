@@ -1,0 +1,651 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": "white",
+  "config": {
+    "font": "DM Sans",
+    "axis": {
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "gridColor": "#edf1ed"
+    },
+    "legend": {
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    },
+    "view": {
+      "stroke": null
+    }
+  },
+  "data": {
+    "values": [
+      {
+        "year": 1996,
+        "category": "Dog attack",
+        "records": 1
+      },
+      {
+        "year": 1997,
+        "category": "Dead",
+        "records": 391
+      },
+      {
+        "year": 1997,
+        "category": "Dog attack",
+        "records": 198
+      },
+      {
+        "year": 1997,
+        "category": "Injured",
+        "records": 569
+      },
+      {
+        "year": 1997,
+        "category": "Orphaned",
+        "records": 1
+      },
+      {
+        "year": 1997,
+        "category": "Sick",
+        "records": 585
+      },
+      {
+        "year": 1997,
+        "category": "Vehicle hit",
+        "records": 492
+      },
+      {
+        "year": 1998,
+        "category": "Dead",
+        "records": 315
+      },
+      {
+        "year": 1998,
+        "category": "Dog attack",
+        "records": 131
+      },
+      {
+        "year": 1998,
+        "category": "Injured",
+        "records": 430
+      },
+      {
+        "year": 1998,
+        "category": "Sick",
+        "records": 653
+      },
+      {
+        "year": 1998,
+        "category": "Vehicle hit",
+        "records": 403
+      },
+      {
+        "year": 1999,
+        "category": "Dead",
+        "records": 360
+      },
+      {
+        "year": 1999,
+        "category": "Dog attack",
+        "records": 163
+      },
+      {
+        "year": 1999,
+        "category": "Injured",
+        "records": 509
+      },
+      {
+        "year": 1999,
+        "category": "Sick",
+        "records": 772
+      },
+      {
+        "year": 1999,
+        "category": "Vehicle hit",
+        "records": 410
+      },
+      {
+        "year": 2000,
+        "category": "Dead",
+        "records": 386
+      },
+      {
+        "year": 2000,
+        "category": "Dog attack",
+        "records": 191
+      },
+      {
+        "year": 2000,
+        "category": "Injured",
+        "records": 593
+      },
+      {
+        "year": 2000,
+        "category": "Sick",
+        "records": 1031
+      },
+      {
+        "year": 2000,
+        "category": "Vehicle hit",
+        "records": 472
+      },
+      {
+        "year": 2001,
+        "category": "Dead",
+        "records": 440
+      },
+      {
+        "year": 2001,
+        "category": "Dog attack",
+        "records": 204
+      },
+      {
+        "year": 2001,
+        "category": "Injured",
+        "records": 540
+      },
+      {
+        "year": 2001,
+        "category": "Orphaned",
+        "records": 1
+      },
+      {
+        "year": 2001,
+        "category": "Sick",
+        "records": 808
+      },
+      {
+        "year": 2001,
+        "category": "Vehicle hit",
+        "records": 503
+      },
+      {
+        "year": 2002,
+        "category": "Dead",
+        "records": 434
+      },
+      {
+        "year": 2002,
+        "category": "Dog attack",
+        "records": 181
+      },
+      {
+        "year": 2002,
+        "category": "Injured",
+        "records": 743
+      },
+      {
+        "year": 2002,
+        "category": "Orphaned",
+        "records": 58
+      },
+      {
+        "year": 2002,
+        "category": "Sick",
+        "records": 782
+      },
+      {
+        "year": 2002,
+        "category": "Vehicle hit",
+        "records": 542
+      },
+      {
+        "year": 2003,
+        "category": "Dead",
+        "records": 407
+      },
+      {
+        "year": 2003,
+        "category": "Dog attack",
+        "records": 152
+      },
+      {
+        "year": 2003,
+        "category": "Injured",
+        "records": 379
+      },
+      {
+        "year": 2003,
+        "category": "Orphaned",
+        "records": 70
+      },
+      {
+        "year": 2003,
+        "category": "Sick",
+        "records": 685
+      },
+      {
+        "year": 2003,
+        "category": "Vehicle hit",
+        "records": 491
+      },
+      {
+        "year": 2004,
+        "category": "Dead",
+        "records": 408
+      },
+      {
+        "year": 2004,
+        "category": "Dog attack",
+        "records": 150
+      },
+      {
+        "year": 2004,
+        "category": "Injured",
+        "records": 511
+      },
+      {
+        "year": 2004,
+        "category": "Orphaned",
+        "records": 50
+      },
+      {
+        "year": 2004,
+        "category": "Sick",
+        "records": 737
+      },
+      {
+        "year": 2004,
+        "category": "Vehicle hit",
+        "records": 579
+      },
+      {
+        "year": 2005,
+        "category": "Dead",
+        "records": 373
+      },
+      {
+        "year": 2005,
+        "category": "Dog attack",
+        "records": 141
+      },
+      {
+        "year": 2005,
+        "category": "Injured",
+        "records": 483
+      },
+      {
+        "year": 2005,
+        "category": "Orphaned",
+        "records": 41
+      },
+      {
+        "year": 2005,
+        "category": "Sick",
+        "records": 697
+      },
+      {
+        "year": 2005,
+        "category": "Vehicle hit",
+        "records": 473
+      },
+      {
+        "year": 2006,
+        "category": "Dead",
+        "records": 363
+      },
+      {
+        "year": 2006,
+        "category": "Dog attack",
+        "records": 151
+      },
+      {
+        "year": 2006,
+        "category": "Injured",
+        "records": 402
+      },
+      {
+        "year": 2006,
+        "category": "Orphaned",
+        "records": 43
+      },
+      {
+        "year": 2006,
+        "category": "Sick",
+        "records": 679
+      },
+      {
+        "year": 2006,
+        "category": "Vehicle hit",
+        "records": 457
+      },
+      {
+        "year": 2007,
+        "category": "Dead",
+        "records": 360
+      },
+      {
+        "year": 2007,
+        "category": "Dog attack",
+        "records": 155
+      },
+      {
+        "year": 2007,
+        "category": "Injured",
+        "records": 442
+      },
+      {
+        "year": 2007,
+        "category": "Orphaned",
+        "records": 39
+      },
+      {
+        "year": 2007,
+        "category": "Sick",
+        "records": 762
+      },
+      {
+        "year": 2007,
+        "category": "Vehicle hit",
+        "records": 486
+      },
+      {
+        "year": 2008,
+        "category": "Dead",
+        "records": 324
+      },
+      {
+        "year": 2008,
+        "category": "Dog attack",
+        "records": 109
+      },
+      {
+        "year": 2008,
+        "category": "Injured",
+        "records": 478
+      },
+      {
+        "year": 2008,
+        "category": "Orphaned",
+        "records": 24
+      },
+      {
+        "year": 2008,
+        "category": "Sick",
+        "records": 834
+      },
+      {
+        "year": 2008,
+        "category": "Vehicle hit",
+        "records": 482
+      },
+      {
+        "year": 2009,
+        "category": "Dead",
+        "records": 325
+      },
+      {
+        "year": 2009,
+        "category": "Dog attack",
+        "records": 155
+      },
+      {
+        "year": 2009,
+        "category": "Injured",
+        "records": 492
+      },
+      {
+        "year": 2009,
+        "category": "Orphaned",
+        "records": 29
+      },
+      {
+        "year": 2009,
+        "category": "Sick",
+        "records": 1011
+      },
+      {
+        "year": 2009,
+        "category": "Vehicle hit",
+        "records": 497
+      },
+      {
+        "year": 2010,
+        "category": "Dead",
+        "records": 318
+      },
+      {
+        "year": 2010,
+        "category": "Dog attack",
+        "records": 120
+      },
+      {
+        "year": 2010,
+        "category": "Injured",
+        "records": 408
+      },
+      {
+        "year": 2010,
+        "category": "Orphaned",
+        "records": 29
+      },
+      {
+        "year": 2010,
+        "category": "Sick",
+        "records": 876
+      },
+      {
+        "year": 2010,
+        "category": "Vehicle hit",
+        "records": 413
+      },
+      {
+        "year": 2011,
+        "category": "Dead",
+        "records": 324
+      },
+      {
+        "year": 2011,
+        "category": "Dog attack",
+        "records": 113
+      },
+      {
+        "year": 2011,
+        "category": "Injured",
+        "records": 421
+      },
+      {
+        "year": 2011,
+        "category": "Orphaned",
+        "records": 30
+      },
+      {
+        "year": 2011,
+        "category": "Sick",
+        "records": 751
+      },
+      {
+        "year": 2011,
+        "category": "Vehicle hit",
+        "records": 441
+      },
+      {
+        "year": 2012,
+        "category": "Dead",
+        "records": 323
+      },
+      {
+        "year": 2012,
+        "category": "Dog attack",
+        "records": 116
+      },
+      {
+        "year": 2012,
+        "category": "Injured",
+        "records": 416
+      },
+      {
+        "year": 2012,
+        "category": "Orphaned",
+        "records": 25
+      },
+      {
+        "year": 2012,
+        "category": "Sick",
+        "records": 914
+      },
+      {
+        "year": 2012,
+        "category": "Under threat",
+        "records": 1
+      },
+      {
+        "year": 2012,
+        "category": "Vehicle hit",
+        "records": 429
+      },
+      {
+        "year": 2013,
+        "category": "Dead",
+        "records": 271
+      },
+      {
+        "year": 2013,
+        "category": "Dog attack",
+        "records": 109
+      },
+      {
+        "year": 2013,
+        "category": "Injured",
+        "records": 307
+      },
+      {
+        "year": 2013,
+        "category": "Orphaned",
+        "records": 25
+      },
+      {
+        "year": 2013,
+        "category": "Sick",
+        "records": 844
+      },
+      {
+        "year": 2013,
+        "category": "Vehicle hit",
+        "records": 317
+      },
+      {
+        "year": 2014,
+        "category": "Dead",
+        "records": 359
+      },
+      {
+        "year": 2014,
+        "category": "Dog attack",
+        "records": 184
+      },
+      {
+        "year": 2014,
+        "category": "Injured",
+        "records": 316
+      },
+      {
+        "year": 2014,
+        "category": "Orphaned",
+        "records": 33
+      },
+      {
+        "year": 2014,
+        "category": "Sick",
+        "records": 814
+      },
+      {
+        "year": 2014,
+        "category": "Under threat",
+        "records": 3
+      },
+      {
+        "year": 2014,
+        "category": "Vehicle hit",
+        "records": 326
+      },
+      {
+        "year": 2015,
+        "category": "Dead",
+        "records": 246
+      },
+      {
+        "year": 2015,
+        "category": "Dog attack",
+        "records": 91
+      },
+      {
+        "year": 2015,
+        "category": "Injured",
+        "records": 300
+      },
+      {
+        "year": 2015,
+        "category": "Orphaned",
+        "records": 50
+      },
+      {
+        "year": 2015,
+        "category": "Sick",
+        "records": 553
+      },
+      {
+        "year": 2015,
+        "category": "Under threat",
+        "records": 40
+      },
+      {
+        "year": 2015,
+        "category": "Vehicle hit",
+        "records": 305
+      }
+    ]
+  },
+  "width": "container",
+  "height": 280,
+  "encoding": {
+    "x": {
+      "field": "year",
+      "type": "ordinal",
+      "title": "Year",
+      "axis": {
+        "labelAngle": -35,
+        "labelOverlap": true
+      }
+    },
+    "y": {
+      "field": "records",
+      "type": "quantitative",
+      "aggregate": "sum",
+      "stack": "zero",
+      "title": "Recorded incident flags"
+    },
+    "color": {
+      "field": "category",
+      "type": "nominal",
+      "title": "Incident flag",
+      "scale": {
+        "scheme": "tableau10"
+      }
+    },
+    "order": {
+      "field": "category",
+      "sort": "ascending"
+    },
+    "tooltip": [
+      {
+        "field": "year",
+        "type": "quantitative",
+        "title": "Year"
+      },
+      {
+        "field": "category",
+        "type": "nominal"
+      },
+      {
+        "field": "records",
+        "type": "quantitative",
+        "format": ","
+      }
+    ]
+  },
+  "mark": {
+    "type": "area",
+    "interpolate": "monotone",
+    "opacity": 0.9
+  }
+}

@@ -1,0 +1,162 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": "white",
+  "config": {
+    "font": "DM Sans",
+    "axis": {
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "gridColor": "#edf1ed"
+    },
+    "legend": {
+      "labelFontSize": 11,
+      "titleFontSize": 12
+    },
+    "view": {
+      "stroke": null
+    }
+  },
+  "data": {
+    "values": [
+      {
+        "category": "Dog attack",
+        "period": "1996\u20132005",
+        "percent": 7.26
+      },
+      {
+        "category": "Dog attack",
+        "period": "2006\u20132015",
+        "percent": 5.33
+      },
+      {
+        "category": "Vehicle hit",
+        "period": "1996\u20132005",
+        "percent": 20.95
+      },
+      {
+        "category": "Vehicle hit",
+        "period": "2006\u20132015",
+        "percent": 17
+      },
+      {
+        "category": "Sick",
+        "period": "1996\u20132005",
+        "percent": 32.39
+      },
+      {
+        "category": "Sick",
+        "period": "2006\u20132015",
+        "percent": 32.9
+      },
+      {
+        "category": "Injured",
+        "period": "1996\u20132005",
+        "percent": 22.83
+      },
+      {
+        "category": "Injured",
+        "period": "2006\u20132015",
+        "percent": 16.3
+      },
+      {
+        "category": "Orphaned",
+        "period": "1996\u20132005",
+        "percent": 1.06
+      },
+      {
+        "category": "Orphaned",
+        "period": "2006\u20132015",
+        "percent": 1.34
+      },
+      {
+        "category": "Dead",
+        "period": "1996\u20132005",
+        "percent": 16.86
+      },
+      {
+        "category": "Dead",
+        "period": "2006\u20132015",
+        "percent": 13.15
+      },
+      {
+        "category": "Under threat",
+        "period": "1996\u20132005",
+        "percent": 0
+      },
+      {
+        "category": "Under threat",
+        "period": "2006\u20132015",
+        "percent": 0.18
+      }
+    ]
+  },
+  "width": 500,
+  "height": 300,
+  "layer": [
+    {
+      "mark": {
+        "type": "rule",
+        "strokeWidth": 2,
+        "color": "#c9d3cc"
+      },
+      "encoding": {
+        "x": {
+          "field": "percent",
+          "type": "quantitative",
+          "aggregate": "min",
+          "title": "Share of records (%)"
+        },
+        "x2": {
+          "field": "percent",
+          "aggregate": "max"
+        },
+        "y": {
+          "field": "category",
+          "type": "nominal",
+          "title": null
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 110
+      },
+      "encoding": {
+        "x": {
+          "field": "percent",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "category",
+          "type": "nominal"
+        },
+        "color": {
+          "field": "period",
+          "type": "nominal",
+          "scale": {
+            "range": [
+              "#408866",
+              "#d18455"
+            ]
+          }
+        },
+        "tooltip": [
+          {
+            "field": "category",
+            "type": "nominal"
+          },
+          {
+            "field": "period",
+            "type": "nominal"
+          },
+          {
+            "field": "percent",
+            "type": "quantitative"
+          }
+        ]
+      }
+    }
+  ]
+}
