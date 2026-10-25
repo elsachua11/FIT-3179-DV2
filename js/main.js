@@ -33,7 +33,13 @@ async function drawChart(elementId, specPath) {
     const spec = await response.json();
     // Plain Vega specs need an explicit pixel width; Vega-Lite specs use "container".
     if (spec.$schema && spec.$schema.includes("/vega/")) {
-      spec.width = Math.max(260, Math.floor(target.clientWidth) - 8);
+      spec.width = Math.max(120, Math.floor(target.clientWidth) - 16);
+    }
+    if (spec.$schema && spec.$schema.includes("/vega-lite/")) {
+      spec.width = "container";
+      spec.autosize = { type: "fit", contains: "padding", resize: true };
+      spec.config = spec.config || {};
+      spec.config.legend = { ...(spec.config.legend || {}), orient: "bottom", labelLimit: 180, titleLimit: 210 };
     }
     await vegaEmbed(target, spec, embedOptions);
     if (typeof scheduleAlignment === "function") scheduleAlignment();
@@ -136,3 +142,19 @@ function scheduleAlignment() {
 window.addEventListener('resize', scheduleAlignment, {passive:true});
 window.addEventListener('load', scheduleAlignment);
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(scheduleAlignment);
+
+
+// Responsive layout: recalculate rendered charts when a viewport crosses
+// a small-laptop breakpoint. Avoid continuous redraw while scrolling.
+let previousChartLayout = window.innerWidth > 1400 ? 'wide' : 'single';
+let responsiveResizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(responsiveResizeTimer);
+  responsiveResizeTimer = setTimeout(() => {
+    const next = window.innerWidth > 1400 ? 'wide' : 'single';
+    if (next !== previousChartLayout) {
+      previousChartLayout = next;
+      Promise.all(charts.map(([id,path]) => drawChart(id,path)));
+    }
+  }, 240);
+}, {passive:true});
