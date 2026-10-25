@@ -461,3 +461,55 @@ th {background:#EADCCB;}
 .credit-block {border-top-color:rgba(252,235,213,.23);}
 .credit-block p {color:#F0E3D5;}
 footer {background:#33271F;color:#F0E3D5;}
+
+/* ==============================================================
+   FIT3179 DV2: SINGLE SCROLLING PAGE / SMALL-LAPTOP RESPONSIVENESS
+   Tested design targets: 1280, 1024 and 768 CSS-pixel viewports.
+   Keep at END of file so it overrides legacy fixed-width rules.
+   ============================================================== */
+html { width:100%; max-width:100%; overflow-x:clip; }
+body { width:100%; max-width:100%; min-width:0; overflow-x:clip; }
+main, .hero-inner, .sources-inner, .footer-inner {min-width:0; max-width:100%;}
+main {width:100%; max-width:1200px; margin-inline:auto; padding-inline:clamp(.875rem,2.3vw,1.5rem);}
+.hero {padding-left:clamp(.875rem,2.3vw,1.5rem); padding-right:clamp(.875rem,2.3vw,1.5rem);}
+.hero-inner {max-width:1160px; margin-inline:auto;}
+.hero .hero-title {max-width:100%; width:100%; overflow-wrap:normal;}
+.hero .hero-title .hero-title-line {max-width:100%;}
+.hero .hero-description, .hero .hero-deck-line, .hero .hero-byline {max-width:100%;}
+.story-section, .intro, .grid, .card, .chart, .seq-feature, .seq-feature-copy,
+.seq-feature-map, .method, .about, .sources-inner {min-width:0;}
+.card {overflow:visible;}
+.chart {width:100%; max-width:100%; overflow:visible;}
+.chart .vega-embed, .chart .vega-embed > div {max-width:100%; min-width:0;}
+.chart canvas, .chart svg {max-width:100%; height:auto;}
+/* Keep the full visualization visible on 13-inch laptops.
+   Side-by-side maps with legends can be wider than half a screen. */
+@media (max-width:1400px) {
+  .grid.two, .grid.three {grid-template-columns:minmax(0,1fr);}
+  .grid > .card {grid-column:auto;}
+  .grid > .card.wide {grid-column:1/-1;}
+  .seq-feature {grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);}
+  .hero .hero-title .hero-title-line {white-space:normal!important; text-wrap:balance;}
+  .hero .hero-description, .hero .hero-deck-line {white-space:normal!important;}
+}
+@media (max-width:900px) {
+  .intro, .seq-feature, .method-grid, .about-grid {grid-template-columns:minmax(0,1fr);}
+  .stats {grid-template-columns:repeat(2,minmax(0,1fr));}
+  .hero .hero-title {font-size:clamp(2.05rem,5.7vw,4.5rem);}
+  .hero .hero-title .hero-title-line {white-space:normal!important; overflow-wrap:break-word;}
+  .seq-feature-map {min-width:0;}
+}
+@media (max-width:540px) {
+  .stats {grid-template-columns:minmax(0,1fr);}
+  .hero .hero-title {font-size:clamp(1.85rem,8vw,2.85rem);}
+  .hero {padding-top:3.75rem; padding-bottom:3.25rem;}
+  .card {padding:.85rem;}
+  .sources {padding-inline:1rem;}
+  .chart .vega-embed {font-size:.85rem;}
+}
+/* The bibliography is full-bleed but not wider than the viewport. */
+.sources {width:100vw; max-width:100vw; left:50%; margin-left:-50vw; margin-right:0;}
+.sources-inner {width:100%; max-width:1160px; margin-inline:auto;}
+/* Avoid creating a second scrollable area inside the page. */
+.table-wrap {overflow-x:visible; max-width:100%;}
+.table-wrap table {width:100%; table-layout:fixed; overflow-wrap:anywhere;}
