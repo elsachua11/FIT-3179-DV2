@@ -1,0 +1,174 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "config": {
+    "font": "DM Sans",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "labelColor": "#44554b",
+      "titleColor": "#44554b",
+      "gridColor": "#edf1ed",
+      "domainColor": "#9aa89f",
+      "tickColor": "#9aa89f"
+    },
+    "legend": {
+      "labelFontSize": 11,
+      "titleFontSize": 11,
+      "labelColor": "#44554b",
+      "titleColor": "#44554b"
+    }
+  },
+  "width": "container",
+  "height": 330,
+  "data": {
+    "url": "data/cleaned/month_year.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "year": "number",
+        "month": "number",
+        "records": "number"
+      }
+    }
+  },
+  "encoding": {
+    "x": {
+      "field": "year",
+      "type": "ordinal",
+      "axis": {
+        "title": null,
+        "labelAngle": 0,
+        "values": [
+          1998,
+          2002,
+          2006,
+          2010,
+          2014,
+          2018,
+          2022
+        ],
+        "ticks": false,
+        "domain": false
+      }
+    },
+    "y": {
+      "field": "month",
+      "type": "ordinal",
+      "axis": {
+        "title": null,
+        "labelExpr": "[\"Jan\", \"Feb\", \"Mar\", \"Apr\", \"May\", \"Jun\", \"Jul\", \"Aug\", \"Sep\", \"Oct\", \"Nov\", \"Dec\"][datum.value - 1]",
+        "ticks": false,
+        "domain": false
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rect",
+        "stroke": "white",
+        "strokeWidth": 1
+      },
+      "encoding": {
+        "color": {
+          "field": "records",
+          "type": "quantitative",
+          "scale": {
+            "scheme": "blues"
+          },
+          "legend": {
+            "title": "Koalas admitted",
+            "orient": "bottom",
+            "direction": "horizontal",
+            "gradientLength": 220
+          }
+        },
+        "tooltip": [
+          {
+            "field": "year",
+            "type": "ordinal",
+            "title": "Year"
+          },
+          {
+            "field": "month",
+            "type": "ordinal",
+            "title": "Month number"
+          },
+          {
+            "field": "records",
+            "title": "Koalas admitted"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "dx": -12,
+        "fontSize": 11.5,
+        "fontWeight": 700,
+        "color": "white",
+        "stroke": "white",
+        "strokeWidth": 3.5
+      },
+      "encoding": {
+        "text": {
+          "field": "t"
+        }
+      },
+      "data": {
+        "values": [
+          {
+            "year": 2019,
+            "month": 9,
+            "t": "Busiest month: Sep 2019 (278)"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "dx": -12,
+        "fontSize": 11.5,
+        "fontWeight": 700,
+        "color": "#1e3028"
+      },
+      "encoding": {
+        "text": {
+          "field": "t"
+        }
+      },
+      "data": {
+        "values": [
+          {
+            "year": 2019,
+            "month": 9,
+            "t": "Busiest month: Sep 2019 (278)"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "year": 2019,
+            "month": 9
+          }
+        ]
+      },
+      "mark": {
+        "type": "rect",
+        "fill": null,
+        "stroke": "#1e3028",
+        "strokeWidth": 2
+      }
+    }
+  ]
+}

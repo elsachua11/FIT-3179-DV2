@@ -1,0 +1,154 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Decline estimates from different sources and periods. Queensland at least 50%, NSW 28.52–65.95%, combined 57%. Not comparable trends.",
+  "width": "container",
+  "height": 255,
+  "data": {
+    "url": "data/cleaned/koala_decline_estimates.csv"
+  },
+  "transform": [
+    {
+      "calculate": "datum.bound === 'range' ? '29–66% range' : datum.bound === 'at least' ? 'At least 50%' : 'About 57%'",
+      "as": "reading"
+    }
+  ],
+  "encoding": {
+    "y": {
+      "field": "region",
+      "type": "nominal",
+      "sort": [
+        "Queensland",
+        "New South Wales",
+        "QLD + NSW + ACT combined"
+      ],
+      "axis": {
+        "title": null,
+        "labelLimit": 200,
+        "labelFontSize": 11
+      }
+    },
+    "x": {
+      "field": "low_pct",
+      "type": "quantitative",
+      "scale": {
+        "domain": [
+          0,
+          85
+        ]
+      },
+      "axis": {
+        "title": "Reported population decline (%)",
+        "values": [
+          0,
+          20,
+          40,
+          60,
+          80
+        ]
+      },
+      "stack": null
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rule",
+        "strokeWidth": 4,
+        "color": "#F6C29D"
+      },
+      "encoding": {
+        "x": {
+          "field": "low_pct",
+          "type": "quantitative"
+        },
+        "x2": {
+          "field": "high_pct"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 145,
+        "color": "#D86A32",
+        "stroke": "white",
+        "strokeWidth": 1
+      },
+      "encoding": {
+        "x": {
+          "field": "low_pct",
+          "type": "quantitative"
+        },
+        "tooltip": [
+          {
+            "field": "region",
+            "title": "Region"
+          },
+          {
+            "field": "period",
+            "title": "Period studied"
+          },
+          {
+            "field": "reading",
+            "title": "Reported decline"
+          },
+          {
+            "field": "source",
+            "title": "Source"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.bound === 'range'"
+        }
+      ],
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 145,
+        "color": "#D86A32",
+        "stroke": "white",
+        "strokeWidth": 1
+      },
+      "encoding": {
+        "x": {
+          "field": "high_pct",
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 11,
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "color": "#A84D24"
+      },
+      "encoding": {
+        "x": {
+          "field": "high_pct",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "reading"
+        }
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "gridColor": "#EFE7DF",
+      "labelColor": "#1769AA",
+      "titleColor": "#1769AA"
+    }
+  }
+}
