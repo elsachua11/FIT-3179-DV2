@@ -1,0 +1,136 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Locator for south-east Queensland hospital admissions maps. Rectangular overlay indicates a broad study area, not exact mapped hospital boundaries.",
+  "width": "container",
+  "height": 235,
+  "projection": {
+    "type": "mercator"
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "data/cleaned/australia_states.geojson",
+        "format": {
+          "type": "json",
+          "property": "features"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "stroke": "#ffffff",
+        "strokeWidth": 1.1,
+        "fill": "#b8d4e5"
+      },
+      "encoding": {
+        "tooltip": [
+          {
+            "field": "properties.state",
+            "type": "nominal",
+            "title": "State"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [
+                    150.0,
+                    -29.6
+                  ],
+                  [
+                    150.0,
+                    -24.6
+                  ],
+                  [
+                    154.4,
+                    -24.6
+                  ],
+                  [
+                    154.4,
+                    -29.6
+                  ],
+                  [
+                    150.0,
+                    -29.6
+                  ]
+                ]
+              ]
+            },
+            "properties": {
+              "name": "South-east Queensland study region"
+            }
+          }
+        ]
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#f18c36",
+        "fillOpacity": 0.22,
+        "stroke": "#a43a20",
+        "strokeWidth": 2.3,
+        "strokeDash": [
+          5,
+          3
+        ]
+      },
+      "encoding": {
+        "tooltip": [
+          {
+            "field": "properties.name",
+            "type": "nominal",
+            "title": "Highlighted area"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "lon": 143.5,
+            "lat": -21.2,
+            "label": "QUEENSLAND"
+          },
+          {
+            "lon": 145.8,
+            "lat": -33.3,
+            "label": "NSW"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "font": "DM Sans",
+        "fontWeight": "bold",
+        "fontSize": 10,
+        "color": "#163f57"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "label"
+        }
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "background": null
+  }
+}

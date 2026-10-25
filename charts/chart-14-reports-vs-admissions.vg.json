@@ -1,0 +1,176 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "config": {
+    "font": "DM Sans",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "labelColor": "#44554b",
+      "titleColor": "#44554b",
+      "gridColor": "#edf1ed",
+      "domainColor": "#9aa89f",
+      "tickColor": "#9aa89f"
+    },
+    "legend": {
+      "labelFontSize": 11,
+      "titleFontSize": 11,
+      "labelColor": "#44554b",
+      "titleColor": "#44554b"
+    }
+  },
+  "width": "container",
+  "height": 330,
+  "data": {
+    "url": "data/cleaned/reports_vs_admissions_by_year.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "year": "number",
+        "records": "number"
+      }
+    }
+  },
+  "encoding": {
+    "x": {
+      "field": "year",
+      "type": "ordinal",
+      "axis": {
+        "title": null,
+        "labelAngle": 0,
+        "values": [
+          1997,
+          2000,
+          2003,
+          2006,
+          2009,
+          2012,
+          2015,
+          2018,
+          2021,
+          2024
+        ]
+      }
+    }
+  },
+  "layer": [
+    {
+      "params": [
+        {
+          "name": "pick",
+          "select": {
+            "type": "point",
+            "fields": [
+              "kind"
+            ]
+          },
+          "bind": "legend"
+        }
+      ],
+      "mark": {
+        "type": "bar",
+        "stroke": "white",
+        "strokeWidth": 0.5
+      },
+      "encoding": {
+        "y": {
+          "field": "records",
+          "type": "quantitative",
+          "aggregate": "sum",
+          "axis": {
+            "title": "Records in the hospital log",
+            "format": ",.0f"
+          }
+        },
+        "color": {
+          "field": "kind",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Koala taken to hospital",
+              "Other report (sighting, left alone, etc.)"
+            ],
+            "range": [
+              "#1769AA",
+              "#E18A36"
+            ]
+          },
+          "legend": {
+            "title": null,
+            "orient": "bottom",
+            "direction": "horizontal",
+            "labelLimit": 300
+          },
+          "sort": [
+            "Koala taken to hospital",
+            "Other report (sighting, left alone, etc.)"
+          ]
+        },
+        "order": {
+          "field": "kind",
+          "type": "nominal",
+          "sort": "descending"
+        },
+        "opacity": {
+          "condition": {
+            "param": "pick",
+            "value": 1
+          },
+          "value": 0.25
+        },
+        "tooltip": [
+          {
+            "field": "year",
+            "type": "ordinal",
+            "title": "Year"
+          },
+          {
+            "field": "kind",
+            "title": "Type"
+          },
+          {
+            "field": "records",
+            "title": "Records",
+            "format": ",.0f"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "year": 2024,
+            "y": 3350,
+            "t": "Until 2012, 45% of rows were\nsightings or animals left alone.\nSince 2017 only 4%. The log\nchanged, so this page counts\nhospital admissions only."
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "baseline": "top",
+        "fontSize": 11,
+        "fontWeight": 600,
+        "color": "#1e3028",
+        "lineBreak": "\n",
+        "lineHeight": 13
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal"
+        },
+        "y": {
+          "field": "y",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "t"
+        }
+      }
+    }
+  ]
+}

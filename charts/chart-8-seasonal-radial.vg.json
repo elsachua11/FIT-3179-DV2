@@ -1,0 +1,201 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "config": {
+    "font": "DM Sans",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "labelColor": "#44554b",
+      "titleColor": "#44554b",
+      "gridColor": "#edf1ed",
+      "domainColor": "#9aa89f",
+      "tickColor": "#9aa89f"
+    },
+    "legend": {
+      "labelFontSize": 11,
+      "titleFontSize": 11,
+      "labelColor": "#44554b",
+      "titleColor": "#44554b"
+    }
+  },
+  "width": "container",
+  "height": 400,
+  "data": {
+    "url": "data/cleaned/month_year.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "year": "number",
+        "month": "number",
+        "records": "number"
+      }
+    }
+  },
+  "transform": [
+    {
+      "aggregate": [
+        {
+          "op": "sum",
+          "field": "records",
+          "as": "total"
+        }
+      ],
+      "groupby": [
+        "month"
+      ]
+    },
+    {
+      "calculate": "datum.month - 1 + 0.04",
+      "as": "a0"
+    },
+    {
+      "calculate": "datum.month - 0.04",
+      "as": "a1"
+    },
+    {
+      "calculate": "datum.month - 0.5",
+      "as": "mid"
+    },
+    {
+      "calculate": "5300",
+      "as": "labelr"
+    },
+    {
+      "calculate": "[\"Jan\", \"Feb\", \"Mar\", \"Apr\", \"May\", \"Jun\", \"Jul\", \"Aug\", \"Sep\", \"Oct\", \"Nov\", \"Dec\"][datum.month - 1]",
+      "as": "name"
+    },
+    {
+      "calculate": "datum.month >= 8 && datum.month <= 10",
+      "as": "peak"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "arc",
+        "stroke": "white",
+        "strokeWidth": 1
+      },
+      "encoding": {
+        "theta": {
+          "field": "a0",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              12
+            ],
+            "range": [
+              0,
+              6.283185
+            ]
+          },
+          "stack": null
+        },
+        "theta2": {
+          "field": "a1"
+        },
+        "radius": {
+          "field": "total",
+          "type": "quantitative",
+          "scale": {
+            "type": "sqrt",
+            "zero": true,
+            "rangeMin": 16,
+            "rangeMax": 150
+          },
+          "stack": null
+        },
+        "color": {
+          "condition": {
+            "test": "datum.peak",
+            "value": "#D86A32"
+          },
+          "value": "#60A5D4"
+        },
+        "tooltip": [
+          {
+            "field": "name",
+            "title": "Month"
+          },
+          {
+            "field": "total",
+            "title": "Koalas admitted (1997–2024)",
+            "format": ",.0f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "radiusOffset": 12,
+        "fontSize": 11.5,
+        "fontWeight": 600,
+        "color": "#1e3028"
+      },
+      "encoding": {
+        "theta": {
+          "field": "mid",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              12
+            ],
+            "range": [
+              0,
+              6.283185
+            ]
+          },
+          "stack": null
+        },
+        "radius": {
+          "field": "labelr",
+          "type": "quantitative",
+          "scale": {
+            "type": "sqrt",
+            "zero": true,
+            "rangeMin": 16,
+            "rangeMax": 150
+          },
+          "stack": null
+        },
+        "text": {
+          "field": "name"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {}
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "top",
+        "fontSize": 11.5,
+        "color": "#D86A32",
+        "lineBreak": "\n",
+        "lineHeight": 14,
+        "fontWeight": 600
+      },
+      "encoding": {
+        "x": {
+          "value": 4
+        },
+        "y": {
+          "value": 4
+        },
+        "text": {
+          "value": "Aug–Oct (orange) =\n36% of all admissions.\nThis is likely linked to the\nbreeding season, when koalas\nmove across roads and suburbs."
+        }
+      }
+    }
+  ]
+}

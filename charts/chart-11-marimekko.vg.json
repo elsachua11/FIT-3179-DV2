@@ -1,0 +1,270 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "config": {
+    "font": "DM Sans",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "labelColor": "#44554b",
+      "titleColor": "#44554b",
+      "gridColor": "#edf1ed",
+      "domainColor": "#9aa89f",
+      "tickColor": "#9aa89f"
+    },
+    "legend": {
+      "labelFontSize": 11,
+      "titleFontSize": 11,
+      "labelColor": "#44554b",
+      "titleColor": "#44554b"
+    }
+  },
+  "width": "container",
+  "height": 330,
+  "padding": {
+    "top": 22,
+    "left": 5,
+    "right": 5,
+    "bottom": 5
+  },
+  "data": {
+    "url": "data/cleaned/situation_fate_marimekko.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "records": "number",
+        "situation_total": "number",
+        "x0": "number",
+        "x1": "number",
+        "y0": "number",
+        "y1": "number",
+        "share_pct": "number",
+        "x_mid": "number"
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rect",
+        "stroke": "white",
+        "strokeWidth": 1.5
+      },
+      "encoding": {
+        "x": {
+          "field": "x0",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              100
+            ],
+            "nice": false
+          },
+          "axis": {
+            "title": "Column width = share of all 57,171 reports (%)",
+            "format": "d",
+            "grid": false
+          }
+        },
+        "x2": {
+          "field": "x1"
+        },
+        "y": {
+          "field": "y0",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              100
+            ],
+            "nice": false
+          },
+          "axis": {
+            "title": "What happened to the koala (% of that situation)",
+            "format": "d"
+          }
+        },
+        "y2": {
+          "field": "y1"
+        },
+        "color": {
+          "field": "fate",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Taken to hospital",
+              "Relocated",
+              "Left alone",
+              "Could not be caught",
+              "Other / not recorded"
+            ],
+            "range": [
+              "#1769AA",
+              "#60A5D4",
+              "#D2DFE9",
+              "#D86A32",
+              "#e9e4d8"
+            ]
+          },
+          "legend": {
+            "title": null,
+            "orient": "bottom",
+            "columns": 3,
+            "labelLimit": 160
+          }
+        },
+        "tooltip": [
+          {
+            "field": "situation",
+            "title": "Situation"
+          },
+          {
+            "field": "fate",
+            "title": "Outcome"
+          },
+          {
+            "field": "records",
+            "title": "Reports",
+            "format": ",.0f"
+          },
+          {
+            "field": "share_pct",
+            "title": "% of this situation"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.share_pct >= 12 && (datum.x1 - datum.x0) >= 9"
+        },
+        {
+          "calculate": "(datum.y0 + datum.y1) / 2",
+          "as": "ym"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "fontSize": 11,
+        "fontWeight": 600
+      },
+      "encoding": {
+        "x": {
+          "field": "x_mid",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              100
+            ],
+            "nice": false
+          }
+        },
+        "y": {
+          "field": "ym",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              100
+            ],
+            "nice": false
+          }
+        },
+        "text": {
+          "field": "share_pct",
+          "type": "quantitative",
+          "format": ".0f"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.fate == 'Taken to hospital' || datum.fate == 'Relocated'",
+            "value": "white"
+          },
+          "value": "#1e3028"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "situation": "In tree",
+            "xm": 20.694,
+            "w": 41.388,
+            "y": 104,
+            "size": 11.5
+          },
+          {
+            "situation": "On ground",
+            "xm": 57.096000000000004,
+            "w": 31.416000000000004,
+            "y": 104,
+            "size": 11.5
+          },
+          {
+            "situation": "Not\nrecorded",
+            "xm": 78.469,
+            "w": 11.329999999999998,
+            "y": 104,
+            "size": 10
+          },
+          {
+            "situation": "In\ncaptivity",
+            "xm": 89.2815,
+            "w": 10.295000000000002,
+            "y": 104,
+            "size": 10
+          },
+          {
+            "situation": "Other",
+            "xm": 97.2145,
+            "w": 5.570999999999998,
+            "y": 104,
+            "size": 10
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 10.5,
+        "fontWeight": 700,
+        "color": "#1e3028",
+        "baseline": "bottom",
+        "lineBreak": "\n",
+        "lineHeight": 11
+      },
+      "encoding": {
+        "x": {
+          "field": "xm",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              100
+            ],
+            "nice": false
+          }
+        },
+        "y": {
+          "field": "y",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              100
+            ],
+            "nice": false
+          }
+        },
+        "text": {
+          "field": "situation"
+        }
+      }
+    }
+  ]
+}
