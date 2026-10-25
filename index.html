@@ -1,204 +1,457 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Koalas in Australia | Habitat, Risk & Conservation</title>
-  <meta name="description"
-    content="A data visualisation story about koala habitat, monitoring and conservation in Australia.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link
-    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+        <meta charset="utf-8" />
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        <title>Koalas in Australia | Habitat, Risk &amp; Conservation</title>
+        <meta content="A data visualisation story for Malaysian students: how many koalas are left, where they live, what puts them in hospital, and how conservation has changed."
+                name="description" />
+        <meta content="Elsa Chua Yi Reen" name="author" />
+        <link href="https://fonts.googleapis.com" rel="preconnect" />
+        <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Fraunces:opsz,wght@9..144,600;9..144,700&amp;display=swap"
+                rel="stylesheet" />
+        <link href="style.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/vega@5.30.0"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.21.0"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.26.0"></script>
 </head>
 
 <body>
-  <header class="hero">
-    <div class="hero-inner">
-      <p class="eyebrow">AUSTRALIA · WILDLIFE · CONSERVATION</p>
-      <h1>Beyond the Eucalyptus: The Fight for Australia's Koalas</h1>
-      <p class="dek">A visual story about where koalas live, what puts them at risk, and why reliable monitoring
-        matters.</p>
-      <p class="hero-note">FIT3179 · DV2 · <span id="updated-date">October 2026</span></p>
-    </div>
-  </header>
-
-  <main>
-    <section class="intro">
-      <div>
-        <p class="section-kicker">THE BIG PICTURE</p>
-        <h2>Finding koalas is difficult. Protecting their habitat is essential.</h2>
-      </div>
-      <p>Koala numbers are estimated using different survey methods, while habitat maps and rescue records answer
-        different questions. These thirteen visualisations (including an Australia locator) use the Queensland koala
-        hospital records included with this project. Counts reflect reported cases, not all koalas in the wild.</p>
-    </section>
-
-    <section class="callout" aria-label="Population estimate caveat">
-      <strong>Important context</strong>
-      <p>The Australian Government's 2025 estimate for listed koala populations in Queensland, New South Wales and the
-        ACT was 398,000–569,000. The government warns that this is not directly comparable with the 2024 estimate
-        because survey coverage and methods changed. A larger estimate does not by itself prove population growth.</p>
-      <a href="https://www.dcceew.gov.au/environment/biodiversity/threatened/species/koalas/national-koala-monitoring-program"
-        target="_blank" rel="noopener">Read the National Koala Monitoring Program source ↗</a>
-    </section>
-
-    <section class="story-section">
-      <p class="section-kicker">01 / WHERE THEY CAN LIVE</p>
-      <h2>Reported koala encounters cluster near urban areas</h2>
-      <p class="section-intro">Begin with an Australia overview to locate the study area. The three detailed maps then
-        zoom into southeast Queensland, where most records in this dataset are concentrated. These are hospital records,
-        not koala population estimates.</p>
-      <div class="chart-grid">
-        <article class="chart-card wide">
-          <h3>Australia overview · Where is the study area?</h3>
-          <p class="chart-caption">For readers unfamiliar with Australian geography: the highlighted area is southeast
-            Queensland on Australia’s east coast. Maps 1–3 zoom into this region.</p>
-          <div id="chart-map-overview" class="chart"></div>
-        </article>
-        <article class="chart-card wide">
-          <h3>Map 1 · Proportional symbol map of hospital records</h3>
-          <p class="chart-caption">Circles represent local government areas, placed at their median recorded location;
-            circle size represents hospital record counts, not wild koala populations. The detailed map zooms into
-            southeast Queensland; use the Australia overview above for geographic context.</p>
-          <div id="chart-map-habitat" class="chart"></div>
-        </article>
-        <article class="chart-card">
-          <h3>Map 2 · Bin map of recorded incidents</h3>
-          <p class="chart-caption">Equal-sized 0.22° grid cells show reported incidents. Orange marks fewer cases;
-            darker blue marks more. A logarithmic scale makes smaller clusters easier to distinguish.</p>
-          <div id="chart-map-records" class="chart"></div>
-        </article>
-        <article class="chart-card">
-          <h3>Map 3 · Flow map of rescues and recorded releases</h3>
-          <p class="chart-caption">A sample of records with an original and release coordinate 5–85 km apart. Teal
-            circles show the original location and orange triangle arrowheads show the release end and movement
-            direction. Lines show straight-line movement, not actual travel routes. Many shorter moves are omitted for
-            legibility.</p>
-          <div id="chart-map-flow" class="chart"></div>
-        </article>
-      </div>
-    </section>
-
-    <section class="story-section">
-      <p class="section-kicker">02 / WHAT RESCUE RECORDS REVEAL</p>
-      <h2>Recorded rescues can reveal patterns of risk</h2>
-      <p class="section-intro">Hospital records are valuable for understanding reported incidents and outcomes. They are
-        not a population census, and changes may reflect reporting, access or rescue practices.</p>
-      <div class="chart-grid">
-        <article class="chart-card">
-          <h3>Chart 4 · Seasonal pattern of hospital records</h3>
-          <p class="chart-caption">A line chart compares hospital record totals across the twelve calendar months,
-            combined over all years.</p>
-          <div id="chart-calendar" class="chart"></div>
-        </article>
-        <article class="chart-card">
-          <h3>Chart 5 · Incident flags over time</h3>
-          <p class="chart-caption">A stacked area chart shows how different incident flags contribute to annual reports.
-            Flags may overlap, so the stack is not a count of unique koalas.</p>
-          <div id="chart-threat-heatmap" class="chart"></div>
-        </article>
-        <article class="chart-card">
-          <h3>Chart 6 · Recorded outcomes by situation</h3>
-          <p class="chart-caption">Stacked horizontal bars compare the mix of recorded outcomes for each encounter
-            situation.</p>
-          <div id="chart-flow" class="chart"></div>
-        </article>
-        <article class="chart-card">
-          <h3>Chart 7 · Changing threat ranks</h3>
-          <p class="chart-caption">Incident-flag categories ranked each year by recorded count (overlapping categories).
-          </p>
-          <div id="chart-bump" class="chart"></div>
-        </article>
-        <article class="chart-card">
-          <h3>Chart 8 · Comparing recorded outcomes</h3>
-          <p class="chart-caption">A lollipop chart compares how frequently each outcome was recorded.</p>
-          <div id="chart-treemap" class="chart"></div>
-        </article>
-        <article class="chart-card">
-          <h3>Chart 9 · Highest-recording local government areas</h3>
-          <p class="chart-caption">Ranked vertical columns compare the twelve local government areas with the most
-            hospital records.</p>
-          <div id="chart-beeswarm" class="chart"></div>
-        </article>
-      </div>
-    </section>
-
-    <section class="story-section">
-      <p class="section-kicker">03 / CONSERVATION RESPONSE</p>
-      <h2>The evidence changes with time and location</h2>
-      <p class="section-intro">The hospital dataset reveals reporting patterns, changes in record counts and differences
-        between incident categories. It does not measure total population or habitat loss.</p>
-      <div class="chart-grid">
-        <article class="chart-card">
-          <h3>Chart 10 · Annual hospital records</h3>
-          <p class="chart-caption">Annual counts from the hospital dataset. These are not estimates of habitat change.
-          </p>
-          <div id="chart-slope" class="chart"></div>
-        </article>
-        <article class="chart-card">
-          <h3>Chart 11 · Situations recorded</h3>
-          <p class="chart-caption">A donut chart compares common recorded situations.</p>
-          <div id="chart-packed" class="chart"></div>
-        </article>
-        <article class="chart-card wide">
-          <h3>Chart 12 · Incident types across two periods</h3>
-          <p class="chart-caption">The proportion of records flagged for each incident type across two periods. Flags
-            can overlap.</p>
-          <div id="chart-connected-dot" class="chart"></div>
-        </article>
-      </div>
-    </section>
-
-    <section class="method">
-      <p class="section-kicker">READ THE EVIDENCE</p>
-      <h2>What these data can—and cannot—tell us</h2>
-      <div class="method-grid">
-        <div>
-          <h3>Population estimates</h3>
-          <p>Modelled estimates depend on survey coverage and method. Compare across years only when the source confirms
-            comparability.</p>
-        </div>
-        <div>
-          <h3>Habitat maps</h3>
-          <p>Suitability models identify likely habitat and priority areas; they do not confirm that koalas are present
-            at every mapped location.</p>
-        </div>
-        <div>
-          <h3>Rescue records</h3>
-          <p>Hospital and rescue records describe reported animals and incidents. They are influenced by human access,
-            reporting and rescue capacity.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="sources">
-      <p class="section-kicker">SOURCES & ACKNOWLEDGEMENTS</p>
-      <h2>Data sources</h2>
-      <ul>
-        <li><a
-            href="https://www.dcceew.gov.au/environment/biodiversity/threatened/species/koalas/national-koala-monitoring-program"
-            target="_blank" rel="noopener">Australian Government — National Koala Monitoring Program</a></li>
-        <li><a href="https://www.data.qld.gov.au/dataset/koala-hospital-data" target="_blank" rel="noopener">Queensland
-            Government — Koala Hospital Data</a></li>
-        <li><a href="https://www.planningportal.nsw.gov.au/opendata/dataset/koala-habitat-information-base"
-            target="_blank" rel="noopener">NSW Government — Koala Habitat Information Base</a></li>
-        <li><a href="https://www.data.qld.gov.au/dataset/south-east-queensland-koala-conservation-strategy-2020-2025"
-            target="_blank" rel="noopener">Queensland Government — South East Queensland Koala Conservation Strategy
-            spatial data</a></li>
-        <li><a href="https://www.ala.org.au/" target="_blank" rel="noopener">Atlas of Living Australia — occurrence
-            records</a></li>
-      </ul>
-      <p class="smallprint">Authored by Elsa Chua Yi Reen · Monash University Malaysia · FIT3179 · 2026. </p>
-    </section>
-  </main>
-  <footer><span>KOALA CONSERVATION · DATA VISUALISATION</span><span>FIT3179 · 2026</span></footer>
-  <script src="js/main.js"></script>
+        <header class="hero">
+                <div class="hero-inner">
+                        <p class="eyebrow">Australia · Wildlife · Conservation</p>
+                        <h1 class="hero-title"><span class="hero-title-line hero-title-accent">Beyond the
+                                        Eucalyptus:</span><span class="hero-title-line">The Fight for Australia's
+                                        Koalas</span></h1>
+                        <p class="dek hero-description"><span class="hero-deck-line">How many koalas are left, where do
+                                        they live, what puts them in hospital, and has the response changed?</span></p>
+                        <p class="hero-byline">Elsa Chua Yi Reen · FIT3179 Data Visualisation · 2026</p><a
+                                class="hero-start" href="#numbers">Start with the story ↘</a>
+                </div>
+        </header>
+        <main>
+                <section class="intro">
+                        <div>
+                                <p class="section-kicker">The big picture</p>
+                                <h2>Koalas live at the edge of Australia's biggest cities. That is the problem.</h2>
+                        </div>
+                        <div class="measure">
+                                <p>Malaysians know the tension between growing towns, new roads and wildlife, from
+                                        Malayan tigers to tapirs.
+                                        Koalas show the same tension on Australia's east coast. Their forests sit right
+                                        beside suburbs, highways and
+                                        dogs, and the numbers we have are hard to compare.</p>
+                        </div>
+                </section>
+                <div aria-label="Key numbers" class="stats">
+                        <div class="stat"><b>398,000–569,000</b><span>estimated wild koalas where they are listed as
+                                        endangered (Queensland, NSW and the ACT), 2025</span></div>
+                        <div class="stat"><b>at least 50%</b><span>fall in Queensland koala numbers since 2001,
+                                        according to Humane Society International</span></div>
+                        <div class="stat"><b>885,596 ha</b><span>of likely koala habitat cleared 2000–2016. That is
+                                        about 36 times the area of Kuala Lumpur (243 km²)</span></div>
+                        <div class="stat green"><b>37,131</b><span>koalas admitted to a Queensland koala hospital,
+                                        1997–2024</span></div>
+                </div>
+                <section aria-labelledby="glossary-title" class="glossary">
+                        <h2 id="glossary-title">Definition:</h2>
+                        <dl class="glossary-list">
+                                <div>
+                                        <dt>Listed as endangered</dt>
+                                        <dd>legally protected by the Australian Government because the species could
+                                                disappear.</dd>
+                                </div>
+                                <div>
+                                        <dt>Hospital admission</dt>
+                                        <dd>a koala that was brought in for care.</dd>
+                                </div>
+                                <div>
+                                        <dt>Local government area (LGA)</dt>
+                                        <dd>a council area, similar to a Malaysian district council.</dd>
+                                </div>
+                                <div>
+                                        <dt>Hectare (ha)</dt>
+                                        <dd>10,000 m², slightly more than a football pitch.</dd>
+                                </div>
+                        </dl>
+                </section>
+                <!-- ===================================================== 1 -->
+                <section class="story-section" id="numbers">
+                        <p class="section-kicker">01 / How many koalas are there?</p>
+                        <h2>Nobody can count them exactly</h2>
+                        <p class="section-intro">Koalas live high in trees and spread across forests, so the figures are
+                                modelled
+                                estimates, not head counts. Start with where koalas are protected, then see how the
+                                estimates and the
+                                decline numbers compare.</p>
+                        <div class="grid two">
+                                <article class="card">
+                                        <p class="num">Map 1 · Choropleth map</p>
+                                        <h3>Where are koalas listed as endangered?</h3>
+                                        <p class="caption">Each state is coloured by its national koala listing status.
+                                                Orange identifies the Queensland, New South Wales and ACT population
+                                                listed as endangered since February 2022.</p>
+                                        <div class="chart" id="chart-map1"></div>
+                                        <p class="so-what"><b>So what?</b> The listed population is only on the east
+                                                coast, but Victoria and South Australia hold hundreds of thousands of
+                                                koalas too and are not nationally listed.</p>
+                                </article>
+                                <article class="card">
+                                        <p class="num">Chart 2 · Range (floating bar) chart</p>
+                                        <h3>Official estimates of wild koalas, 2021–2025</h3>
+                                        <p class="caption">Each bar spans the low and high estimate for Queensland, NSW
+                                                and the ACT. A wide bar means
+                                                high uncertainty. The black tick is a single-number estimate with no
+                                                range.</p>
+                                        <div class="chart" id="chart-2"></div>
+                                        <p class="so-what"><b>So what?</b> The larger 2025 national estimate mainly
+                                                reflects wider surveys and better detection, not confirmed population
+                                                growth. </p>
+                                </article>
+                        </div>
+                        <div class="grid two">
+                                <article class="card">
+                                        <p class="num">Chart 3 · Connected comparison</p>
+                                        <h3>Koala declines have been serious across the east coast</h3>
+                                        <p class="caption">Each line starts at zero and ends at the reported decline.
+                                                New South Wales has a range; the other published figures are single
+                                                estimates or minimums. These cover different time periods.</p>
+                                        <div class="chart" id="chart-3"></div>
+                                        <p class="so-what"><b>So what?</b> All three reports describe substantial
+                                                declines. They cannot be combined into one Australia-wide percentage.
+                                        </p>
+                                </article>
+                                <article class="card">
+                                        <p class="num">Why it matters</p>
+                                        <h3>Two threats behind the decline</h3>
+                                        <p class="caption">Figures from the Australian Senate inquiry into koala
+                                                conservation.</p>
+                                        <p><strong>Habitat loss.</strong> At least 885,596 hectares of forest and
+                                                woodland known or likely to be koala
+                                                habitat were cleared between 2000 and 2016.</p>
+                                        <p><strong>Bushfire.</strong> The 2019–20 "Black Summer" fires burnt more than
+                                                500,000 hectares of forest.
+                                                Estimates of koala deaths range from at least 6,400 to about 61,000, so
+                                                even the damage is uncertain.</p>
+                                        <p class="so-what"><b>So what?</b> Habitat loss is slow and steady, while fire
+                                                is sudden. Chart 15 places both
+                                                on one timeline.</p>
+                                </article>
+                        </div>
+                </section>
+                <!-- ===================================================== 2 -->
+                <section class="story-section" id="where">
+                        <p class="section-kicker">02 / Where do koalas live?</p>
+                        <h2>Habitat is strongest on the coast, and so are the people</h2>
+                        <p class="section-intro">Two views of the same story. First, survey results across New South
+                                Wales. Then a
+                                close look at south-east Queensland, where koalas share land with Brisbane, the Gold
+                                Coast and millions of
+                                people.</p>
+                        <div class="grid two">
+                                <article class="card">
+                                        <p class="num">Map 4 · Grid choropleth </p>
+                                        <h3>Where do surveys find koalas in New South Wales?</h3>
+                                        <p class="caption">Each square is a cell about 10 km wide. Colour shows the
+                                                share of surveyed sites in the
+                                                cell where koalas were found, from the NSW Koala Likelihood Map (2019).
+                                                Cells with fewer than 5 surveyed
+                                                sites are hidden.</p>
+                                        <div class="chart" id="chart-map4"></div>
+                                        <p class="so-what"><b>So what?</b> Koalas are found most reliably along the
+                                                north-east coast and in a cluster
+                                                inland in the north. Pale cells mean few koalas were found where people
+                                                looked.</p>
+                                </article>
+                                <article class="card">
+                                        <p class="num">Chart 5 · Treemap</p>
+                                        <h3>Which councils send the most koalas to hospital?</h3>
+                                        <p class="caption">Area is proportional to koalas admitted from each local
+                                                government area, 1997–2024. Hover for
+                                                exact counts.</p>
+                                        <div class="chart" id="chart-13"></div>
+                                        <p class="so-what"><b>So what?</b> Moreton Bay and Redland, the two bayside
+                                                councils around Brisbane, make
+                                                up more than half of all admissions that have a mapped location.</p>
+                                </article>
+                        </div>
+                        <div class="seq-feature">
+                                <div class="seq-feature-copy">
+                                        <p class="seq-feature-kicker">OUR NEXT STUDY AREA</p>
+                                        <p class="seq-feature-description">Three maps, one Queensland coastline. First,
+                                                see which councils record more hospital admissions. Next, compare how
+                                                hotspots shift between periods. Finally, follow the straight-line links
+                                                between where koalas were found and released.</p>
+                                </div>
+                                <div class="seq-feature-map">
+                                        <div class="seq-map-title">South-east Queensland · Australia</div>
+                                        <div aria-label="Australia locator map with south-east Queensland highlighted by a dashed rectangular boundary"
+                                                class="chart seq-locator-chart" id="chart-seq-locator" role="img"></div>
+                                </div>
+                        </div>
+                        <div class="grid three">
+                                <article class="card">
+                                        <p class="num">Map 6 · Proportional symbol map</p>
+                                        <h3>Where are the hospital hot spots?</h3>
+                                        <p class="caption">One circle per council, placed at the median location of its
+                                                records. Bigger circle = more
+                                                koalas admitted, 1997–2024. Hover a circle.</p>
+                                        <div class="chart" id="chart-map5"></div>
+                                        <p class="so-what"><b>So what?</b> Admissions cluster around Moreton Bay and
+                                                Redland Bay on the coast.</p>
+                                </article>
+                                <article class="card">
+                                        <p class="num">Map 7 · Bin map (with time selector)</p>
+                                        <h3>Has the hot spot moved?</h3>
+                                        <p class="caption">The region is split into 24 km cells. Darker red = more
+                                                koalas admitted per year. Use the
+                                                buttons under the map to change the period.</p>
+                                        <div class="chart" id="chart-map6"></div>
+                                        <p class="so-what"><b>So what?</b> The hottest cell moved from south-east of
+                                                Brisbane (1997–2005) to north of
+                                                it (since 2006), and active cells more than doubled from 39 to 94.</p>
+                                </article>
+                                <article class="card">
+                                        <p class="num">Map 8 · Flow map</p>
+                                        <h3>Where are rescued koalas released?</h3>
+                                        <p class="caption">Each line joins the place a koala was found (circle) to the
+                                                place it was released
+                                                (triangle), when the two are 5–85 km apart. A random sample of 140 of
+                                                646 such records.</p>
+                                        <div class="chart" id="chart-map7"></div>
+                                        <p class="so-what"><b>So what?</b> Most koalas are released close to where they
+                                                were found. Only about 8% of records with a release point (646 of 8,086)
+                                                were released 5–85 km away. Lines are straight, not real routes.</p>
+                                </article>
+                        </div>
+                </section>
+                <!-- ===================================================== 3 -->
+                <section class="story-section" id="risk">
+                        <p class="section-kicker">03 / What puts koalas in hospital?</p>
+                        <h2>Disease, cars and the breeding season</h2>
+                        <p class="section-intro">The hospital records show what goes wrong for koalas that live near
+                                people. A
+                                koala can be flagged for more than one cause, such as sick <em>and</em> injured, so
+                                shares add up to more than
+                                100%.</p>
+                        <div class="grid two">
+                                <article class="card">
+                                        <p class="num">Chart 9 · Radial bar chart</p>
+                                        <h3>Which months are busiest?</h3>
+                                        <p class="caption">Each wedge is a month of the year. Longer wedge = more koalas
+                                                admitted, added up over
+                                                1997–2024. Orange marks August to October.</p>
+                                        <div class="chart" id="chart-8"></div>
+                                        <p class="so-what"><b>So what?</b> One in three admissions happens in just three
+                                                months, when koalas are
+                                                moving around to breed.</p>
+                                </article>
+                                <article class="card">
+                                        <p class="num">Chart 10 · Heat map</p>
+                                        <h3>Is the busy season the same every year?</h3>
+                                        <p class="caption">Each square is one month of one year. Darker orange = more
+                                                koalas admitted. The black box
+                                                marks the single busiest month.</p>
+                                        <div class="chart" id="chart-9"></div>
+                                        <p class="so-what"><b>So what?</b> The August to October band shows up in almost
+                                                every year. The busiest
+                                                month, September 2019, came during a severe drought.</p>
+                                </article>
+                        </div>
+                        <div class="grid two">
+                                <article class="card">
+                                        <p class="num">Chart 11 · Heat map</p>
+                                        <h3>What are koalas admitted for?</h3>
+                                        <p class="caption">Each square is the share of that year's admissions flagged
+                                                with a cause. Darker = a bigger
+                                                share. Numbers in the squares show selected years.</p>
+                                        <div class="chart" id="chart-10"></div>
+                                        <p class="so-what"><b>So what?</b> Vehicle strikes, dog attacks and koalas found
+                                                dead have all become a
+                                                smaller share (vehicle hit: 36% to 17%), while sickness is the main
+                                                reason, about 56% of admissions in
+                                                2024. Recording practice may have changed, so treat trends with care.
+                                        </p>
+                                </article>
+                                <article class="card">
+                                        <p class="num">Chart 12 · Bar chart</p>
+                                        <h3>Do faster roads kill more koalas?</h3>
+                                        <p class="caption">Koalas hit by vehicles, grouped by the posted speed limit of
+                                                the road (only recorded for
+                                                some strikes).</p>
+                                        <div class="chart" id="chart-12"></div>
+                                        <p class="so-what"><b>So what?</b> Strikes happen on every kind of road, but 80
+                                                km/h and above roads account
+                                                for 55%. Counts are not adjusted for how much road exists at each speed.
+                                        </p>
+                                </article>
+                        </div>
+                        <div class="grid two">
+                                <article class="card wide">
+                                        <p class="num">Chart 13 · Mosaic chart</p>
+                                        <h3>What happens after someone reports a koala?</h3>
+                                        <p class="caption">Each column is a situation when the koala was found. The
+                                                width of a column is its share of
+                                                all reports. Colours show what happened next. Numbers are percentages of
+                                                that column.</p>
+                                        <div class="chart" id="chart-11"></div>
+                                        <p class="so-what"><b>So what?</b> Koalas found on the ground are usually taken
+                                                to hospital (86%), while koalas
+                                                seen in trees are as likely to be left alone (41%) as admitted (41%),
+                                                because a koala in a tree is often fine.</p>
+                                </article>
+                        </div>
+                </section>
+                <!-- ===================================================== 4 -->
+                <section class="story-section" id="response">
+                        <p class="section-kicker">04 / Has the response changed?</p>
+                        <h2>More protection and money</h2>
+                        <p class="section-intro">Conservation changed in two ways: governments raised the koala's legal
+                                status and
+                                funding, and the way koalas are recorded and counted changed too. Both matter when
+                                reading the charts above.</p>
+                        <div class="grid two">
+                                <article class="card wide">
+                                        <p class="num">Chart 14 · Stacked bar chart (click the legend)</p>
+                                        <h3>The hospital log changed over time</h3>
+                                        <p class="caption">Records per year, split into koalas taken to hospital and
+                                                other reports (sightings, animals
+                                                left alone). Click a legend entry to highlight it.</p>
+                                        <div class="chart" id="chart-14"></div>
+                                        <p class="so-what"><b>So what?</b> After 2016 almost every row is a hospital
+                                                admission. Counting all rows would
+                                                show a fake decline, so every trend on this page uses admissions only.
+                                                Admissions stayed steady at
+                                                about 900–1,700 a year, peaking at 1,731 in 2019.</p>
+                                </article>
+                                <article class="card wide">
+                                        <p class="num">Chart 15 · Conservation response timeline</p>
+                                        <h3>When did conservation action change?</h3>
+                                        <p class="caption">Read across the years: horizontal bands show pressures that
+                                                lasted several years, while circles show dated government decisions and
+                                                new surveys. The sequence highlights the change from documenting threats
+                                                to making stronger commitments.</p>
+                                        <div class="chart" id="chart-15"></div>
+                                        <p class="so-what"><b>So what? </b>Habitat loss and severe fires came before
+                                                stronger protection. Endangered status in 2022 and later monitoring are
+                                                responses—not proof that populations have recovered.</p>
+                                </article>
+                        </div>
+                        <div class="chapter-end">
+                                <h3>What can we say?</h3>
+                                <p class="conclusion-text">Koalas are in serious trouble in the places where they are
+                                        listed, and they live closest to people on the
+                                        Queensland coast. Disease, vehicles and the spring breeding season put the most
+                                        koalas in hospital.</p>
+                        </div>
+                </section>
+                <section class="method" id="conclusion">
+                        <p class="section-kicker">05 / Conclusion</p>
+                        <h2>What does the evidence tell us?</h2>
+                        <p class="conclusion-lead">Koalas remain endangered in Queensland, New South Wales and the ACT.
+                                Improved monitoring is finding animals that earlier surveys missed, but this is not
+                                proof of population recovery. Hospital records reveal pressures from disease and
+                                vehicles in populated parts of Queensland, while habitat protection remains essential.
+                        </p>
+                        <div class="method-grid">
+                                <div>
+                                        <h3>Population estimates</h3>
+                                        <p>Modelled estimates depend on survey coverage and method. Compare years only
+                                                when the source says they are
+                                                comparable.</p>
+                                </div>
+                                <div>
+                                        <h3>Habitat survey map</h3>
+                                        <p>The NSW map shows where surveys found koalas. A pale cell can mean few
+                                                koalas, or few surveys.</p>
+                                </div>
+                                <div>
+                                        <h3>Hospital records</h3>
+                                        <p>They describe koalas people found and reported, shaped by where people live
+                                                and how records were kept. They
+                                                are not a census of wild koalas.</p>
+                                </div>
+                        </div>
+                </section>
+                <section class="sources" id="sources">
+                        <div class="sources-inner">
+                                <p class="section-kicker">Sources and acknowledgement</p>
+                                <h2>Data sources</h2>
+                                <div class="apa-references">
+                                        <p class="apa-entry">Australian Government, Department of Climate Change,
+                                                Energy, the Environment and Water. (n.d.). <em>National Koala Monitoring
+                                                        Program</em>. <a
+                                                        href="https://www.dcceew.gov.au/environment/biodiversity/threatened/species/koalas/national-koala-monitoring-program"
+                                                        rel="noopener"
+                                                        target="_blank">https://www.dcceew.gov.au/environment/biodiversity/threatened/species/koalas/national-koala-monitoring-program</a>
+                                        </p>
+                                        <p class="apa-entry">Humane Society International Australia. (n.d.). <em>New
+                                                        koala population estimates offer hope, not complacency</em>. <a
+                                                        href="https://hsi.org.au/blog/new-koala-population-estimates-offer-hope-not-complacency/"
+                                                        rel="noopener"
+                                                        target="_blank">https://hsi.org.au/blog/new-koala-population-estimates-offer-hope-not-complacency/</a>
+                                        </p>
+                                        <p class="apa-entry">New South Wales Government. (2019). <em>Koala Habitat
+                                                        Information Base [Data set]</em>. <a
+                                                        href="https://www.planningportal.nsw.gov.au/opendata/dataset/koala-habitat-information-base"
+                                                        rel="noopener"
+                                                        target="_blank">https://www.planningportal.nsw.gov.au/opendata/dataset/koala-habitat-information-base</a>
+                                        </p>
+                                        <p class="apa-entry">NSW Department of Climate Change, Energy, the Environment
+                                                and Water. (2025, December 11). <em>NSW koala baseline survey to drive
+                                                        conservation action</em>. <a
+                                                        href="https://www.environment.nsw.gov.au/news/nsw-koala-baseline-survey-drive-conservation-action"
+                                                        rel="noopener"
+                                                        target="_blank">https://www.environment.nsw.gov.au/news/nsw-koala-baseline-survey-drive-conservation-action</a>
+                                        </p>
+                                        <p class="apa-entry">Parliament of Australia. (n.d.). <em>Chapter 2: Key issues.
+                                                        Save the Koala inquiry</em>. <a
+                                                        href="https://www.aph.gov.au/Parliamentary_Business/Committees/Senate/Environment_and_Communications/SavetheKoala47th/Report/Chapter_2_-_Key_Issues"
+                                                        rel="noopener"
+                                                        target="_blank">https://www.aph.gov.au/Parliamentary_Business/Committees/Senate/Environment_and_Communications/SavetheKoala47th/Report/Chapter_2_-_Key_Issues</a>
+                                        </p>
+                                        <p class="apa-entry">Queensland Government. (n.d.). <em>Koala hospital data
+                                                        [Data set]</em>. <a
+                                                        href="https://www.data.qld.gov.au/dataset/koala-hospital-data"
+                                                        rel="noopener"
+                                                        target="_blank">https://www.data.qld.gov.au/dataset/koala-hospital-data</a>
+                                        </p>
+                                        <p class="apa-entry">Rowan Hogan. (n.d.). <em>Australian states [GeoJSON data
+                                                        set]</em>. <a
+                                                        href="https://github.com/rowanhogan/australian-states"
+                                                        rel="noopener"
+                                                        target="_blank">https://github.com/rowanhogan/australian-states</a>
+                                        </p>
+                                        <p class="apa-entry">Save the Koala (Australian Koala Foundation). (2025,
+                                                November 5). <em>CSIRO koala numbers [Media release]</em>. <a
+                                                        href="https://savethekoala.com/wp-content/uploads/2025/11/CSIRO-Koala-Numbers-Press-Release.pdf"
+                                                        rel="noopener"
+                                                        target="_blank">https://savethekoala.com/wp-content/uploads/2025/11/CSIRO-Koala-Numbers-Press-Release.pdf</a>
+                                        </p>
+                                        <p class="apa-entry">Wood Central. (n.d.). <em>CSIRO estimates of koala
+                                                        populations have doubled in 12 months</em>. <a
+                                                        href="https://woodcentral.com.au/csiro-estimates-of-koala-populations-have-doubled-in-12-months/"
+                                                        rel="noopener"
+                                                        target="_blank">https://woodcentral.com.au/csiro-estimates-of-koala-populations-have-doubled-in-12-months/</a>
+                                        </p>
+                                </div>
+                                <div class="credit-block">
+                                        <h2>AI acknowledgement</h2>
+                                        <p>AI tools, including Claude (Anthropic) and ChatGPT (OpenAI), assisted with
+                                                drafting and revising the data-cleaning scripts, layout code and explanatory text. The author is
+                                                responsible for verifying the original data, checking the visualisations
+                                                and ensuring the submission is accurate.</p>
+                                </div>
+                        </div>
+                </section>
+        </main>
+        <footer>
+                <div class="footer-inner"><span>Elsa Chua Yi Reen</span><span>FIT3179 · Data Visualisation </span><span>26 October 2026</span></div>
+        </footer>
+        <script src="js/main.js"></script>
 </body>
 
 </html>
