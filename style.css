@@ -248,7 +248,19 @@ footer {background:#113527;color:#e0e9dc;border:0;border-top:1px solid rgba(255,
 .sources h2{margin-bottom:1.25rem}
 .credit-block{margin-top:2.7rem}
 footer{max-width:none;width:100%;margin:0;padding:1.45rem 1.25rem 1.7rem;background:#0F3225;color:#D6E4D6}
-.footer-inner{width:100%;max-width:1160px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.footer-inner {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 clamp(.875rem, 2.3vw, 1.5rem);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+}
 @media(max-width:1100px){.hero .hero-title{font-size:clamp(2.4rem,4.4vw,3.45rem)}}
 @media(max-width:840px){.hero{min-height:auto}.hero .hero-title{font-size:clamp(2.15rem,5.7vw,3.4rem)}.hero-title-line{white-space:normal}.hero .hero-description{width:100%}}
 @media(max-width:600px){.top-attribution-inner{flex-direction:column;gap:.15rem}.hero .hero-title{font-size:clamp(2.05rem,8vw,3rem)}.hero .hero-description{font-size:1rem}.seq-transition{font-size:1.4rem!important}.sources{padding:3rem 1.25rem}.footer-inner{align-items:flex-start;flex-direction:column}}
@@ -469,7 +481,7 @@ footer {background:#33271F;color:#F0E3D5;}
    ============================================================== */
 html { width:100%; max-width:100%; overflow-x:clip; }
 body { width:100%; max-width:100%; min-width:0; overflow-x:clip; }
-main, .hero-inner, .sources-inner, .footer-inner {min-width:0; max-width:100%;}
+main, .hero-inner, .sources-inner {min-width:0; max-width:100%;}
 main {width:100%; max-width:1200px; margin-inline:auto; padding-inline:clamp(.875rem,2.3vw,1.5rem);}
 .hero {padding-left:clamp(.875rem,2.3vw,1.5rem); padding-right:clamp(.875rem,2.3vw,1.5rem);}
 .hero-inner {max-width:1160px; margin-inline:auto;}
@@ -513,3 +525,23 @@ main {width:100%; max-width:1200px; margin-inline:auto; padding-inline:clamp(.87
 /* Avoid creating a second scrollable area inside the page. */
 .table-wrap {overflow-x:visible; max-width:100%;}
 .table-wrap table {width:100%; table-layout:fixed; overflow-wrap:anywhere;}
+
+/* Footer: align all three labels with the main visualisation content width.
+   Keep the background full-bleed, with spacing controlled by .footer-inner. */
+footer { padding-inline: 0 !important; }
+.footer-inner {
+  width: 100%;
+  max-width: 1200px;
+  min-width: 0;
+  margin-inline: auto;
+  padding-inline: clamp(.875rem, 2.3vw, 1.5rem);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+}
+@media (max-width: 600px) {
+  .footer-inner { flex-direction: column; align-items: flex-start; }
+}
